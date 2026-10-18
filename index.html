@@ -2331,4 +2331,24 @@ sync();
 #sapClearX{position:absolute;right:7px;top:50%;transform:translateY(-50%);width:26px;height:26px;border:0;border-radius:50%;background:var(--k-head,#eee);color:var(--k-mut,#666);font-size:13px;line-height:1;display:none;align-items:center;justify-content:center;padding:0;cursor:pointer;z-index:2}
 html:root body .sap-main-input{padding-right:40px!important}
 </style>
+<script>
+(function(){var r=document.documentElement,vv=window.visualViewport;
+function h(){r.style.setProperty('--vvh',(vv?vv.height:innerHeight)+'px')}h();
+if(vv)vv.addEventListener('resize',h);addEventListener('resize',h);addEventListener('orientationchange',function(){setTimeout(h,300)});
+function isTxt(el){if(!el||!el.tagName)return false;if(el.tagName==='TEXTAREA'||el.tagName==='SELECT')return true;return el.tagName==='INPUT'&&!/^(checkbox|radio|button|submit|file|range|color)$/i.test(el.type||'')}
+var t;
+document.addEventListener('focusin',function(e){if(!isTxt(e.target)||innerWidth>650)return;clearTimeout(t);r.classList.add('kb');
+ if(e.target.id==='sapModelSearch')setTimeout(function(){try{document.getElementById('sapComboPanel').scrollIntoView({block:'start'})}catch(x){}},320)});
+document.addEventListener('focusout',function(){clearTimeout(t);t=setTimeout(function(){if(!isTxt(document.activeElement))r.classList.remove('kb')},200)});
+})();
+</script>
+<style id="kb-css">
+@media(max-width:650px){
+html:root body .top{position:static!important;margin-bottom:0!important}
+html:root body #sapModelResults{max-height:calc(var(--vvh,100dvh) - 150px)!important}
+html.kb:root body #sapModelResults{max-height:calc(var(--vvh,100dvh) - 110px)!important}
+html.kb:root body .bnav,html.kb:root body #procBar{display:none!important}
+html.kb:root body .sap-laptop-only{padding-bottom:16px!important}
+}
+</style>
 </body></html>
